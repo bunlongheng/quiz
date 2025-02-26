@@ -9,11 +9,16 @@ const ResultScreen = ({ score, total }) => {
     const isPass = score >= total / 2;
 
     useEffect(() => {
+        if (isPass) {
+            const congratsSound = new Audio("/sounds/congrats.mp3");
+            congratsSound.play();
+        }
+
         const timer = setTimeout(() => {
-            navigate("/"); // Redirects to home after 5s
-        }, 5000);
-        return () => clearTimeout(timer); // Cleanup timer
-    }, [navigate]);
+            window.location.reload();
+        }, 9000);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div
@@ -35,7 +40,7 @@ const ResultScreen = ({ score, total }) => {
             <h1 style={{ fontSize: "50px", fontWeight: "bold" }}>{isPass ? "🎉 WELL DONE!" : "❌ TRY AGAIN!"}</h1>
             <h2 style={{ fontSize: "30px", margin: "20px 0" }}>Your score: {percentage}%</h2>
             <button
-                onClick={() => navigate("/")}
+                onClick={() => window.location.reload()}
                 style={{
                     marginTop: "20px",
                     padding: "15px 30px",
@@ -49,7 +54,7 @@ const ResultScreen = ({ score, total }) => {
                     boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
                 }}
             >
-                Back to Main
+                Back
             </button>
         </div>
     );
