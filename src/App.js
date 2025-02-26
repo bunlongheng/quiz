@@ -1,73 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const quizData = [
-    {
-        question: "What is the largest dinosaur?",
-        options: ["T-Rex", "Brachiosaurus", "Spinosaurus", "Argentinosaurus"],
-        answer: "Argentinosaurus",
-    },
-    {
-        question: "Which dinosaur had three horns?",
-        options: ["Stegosaurus", "Triceratops", "Velociraptor", "Baryonyx"],
-        answer: "Triceratops",
-    },
-];
-
-export default function QuizTaker() {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+const App = () => {
+    const [quizData, setQuizData] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [feedback, setFeedback] = useState("");
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
 
+    // Load quiz questions from JSON
+    useEffect(() => {
+        fetch("/data/dino.json")
+            .then(response => response.json())
+            .then(data => setQuizData(data))
+            .catch(error => console.error("Error loading JSON:", error));
+    }, []);
+
+    // Function to play sounds
+    const playSound = type => {
+        const audio = new Audio(type === "correct" ? "/sounds/correct.mp3" : "/sounds/wrong.mp3");
+        audio.play();
+    };
+
     const handleAnswer = option => {
-        if (selectedAnswer) return;
         setSelectedAnswer(option);
 
-        if (option === quizData[currentQuestionIndex].answer) {
-            setFeedback("Correct!");
+        if (option === quizData[currentQuestion].answer) {
             setScore(score + 1);
-            new Audio("/sounds/correct.mp3").play();
+            playSound("correct"); // Play correct sound
         } else {
-            setFeedback(`Wrong! The correct answer was ${quizData[currentQuestionIndex].answer}`);
-            new Audio("/sounds/wrong.mp3").play();
+            playSound("wrong"); // Play wrong sound
         }
+
+        setTimeout(() => {
+            if (currentQuestion + 1 < quizData.length) {
+                setCurrentQuestion(currentQuestion + 1);
+                setSelectedAnswer(null);
+            } else {
+                setShowResult(true);
+            }
+        }, 1000);
     };
 
-    const handleNextQuestion = () => {
-        if (currentQuestionIndex + 1 < quizData.length) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedAnswer(null);
-            setFeedback("");
-        } else {
-            setShowResult(true);
-        }
-    };
+    if (quizData.length === 0) return <h1>Loading...</h1>;
 
     return (
-        <div className="quiz-container p-6 text-center">
-            {!showResult ? (
-                <>
-                    <h1 className="text-2xl font-bold mb-4">{quizData[currentQuestionIndex].question}</h1>
-                    <div className="space-y-2">
-                        {quizData[currentQuestionIndex].options.map(option => (
-                            <button key={option} className={`block w-full p-2 rounded-lg text-white font-semibold ${selectedAnswer === option ? (option === quizData[currentQuestionIndex].answer ? "bg-green-500" : "bg-red-500") : "bg-blue-500 hover:bg-blue-700"}`} onClick={() => handleAnswer(option)}>
-                                {option}
-                            </button>
-                        ))}
-                    </div>
-                    <p className="mt-4 text-lg font-semibold">{feedback}</p>
-                    {selectedAnswer && (
-                        <button className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-900" onClick={handleNextQuestion}>
-                            {currentQuestionIndex + 1 < quizData.length ? "Next Question" : "See Result"}
-                        </button>
-                    )}
-                </>
+        <div style={{ textAlign: "center", padding: "20px" }}>
+            <h1>Dinosaur Quiz 🦖</h1>
+            {showResult ? (
+                <h2>
+                    Your score: {score} / {quizData.length}
+                </h2>
             ) : (
-                <h1 className="text-2xl font-bold">
-                    Quiz Completed! Your Score: {score}/{quizData.length}
-                </h1>
+                <div>
+                    <h3>{quizData[currentQuestion].question}</h3>
+                    {quizData[currentQuestion].options.map(option => (
+                        <button
+                            key={option}
+                            onClick={() => handleAnswer(option)}
+                            style={{
+                                display: "block",
+                                margin: "10px auto",
+                                padding: "12px",
+                                width: "220px",
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                                cursor: "pointer",
+                                borderRadius: "8px",
+                                transition: "all 0.2s ease-in-out",
+                                background: selectedAnswer === option ? (option === quizData[currentQuestion].answer ? "green" : "red") : "lightgray",
+                                color: "white",
+                                border: "2px solid transparent",
+                            }}
+                            onMouseEnter={e => (e.target.style.border = "2px solid black")} // Hover effect
+                            onMouseLeave={e => (e.target.style.border = "2px solid transparent")} // Reset hover
+                        >
+                            {option}
+                        </button>
+                    ))}
+                </div>
             )}
         </div>
     );
-}
+};
+
+export default App;
