@@ -43,10 +43,13 @@ const App = () => {
             <div style={{ textAlign: "center", padding: "20px" }}>
                 <h1>Pick a Quiz 🧠</h1>
                 <button onClick={() => startQuiz("dino")} style={styles.button} onMouseEnter={e => (e.target.style.border = "2px solid black")} onMouseLeave={e => (e.target.style.border = "2px solid transparent")}>
-                    🦖 Dinosaur Quiz
+                    🦖 Dinosaur
                 </button>
                 <button onClick={() => startQuiz("states")} style={styles.button} onMouseEnter={e => (e.target.style.border = "2px solid black")} onMouseLeave={e => (e.target.style.border = "2px solid transparent")}>
-                    🌎 U.S. States Quiz
+                    🌎 U.S. States
+                </button>
+                <button onClick={() => startQuiz("birds")} style={styles.button} onMouseEnter={e => (e.target.style.border = "2px solid black")} onMouseLeave={e => (e.target.style.border = "2px solid transparent")}>
+                    🕊️ Birds
                 </button>
             </div>
         );
@@ -56,7 +59,7 @@ const App = () => {
 
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
-            <h1>{quizCategory === "dino" ? "Dinosaur Quiz 🦖" : "U.S. States Quiz 🌎"}</h1>
+            <h1>{quizCategory.charAt(0).toUpperCase() + quizCategory.slice(1)} </h1>
             {showResult ? (
                 <h2>
                     Your score: {score} / {quizData.length}
