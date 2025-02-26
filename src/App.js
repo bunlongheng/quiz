@@ -13,6 +13,8 @@ const App = () => {
     const [quizCategory, setQuizCategory] = useState(null);
     const [answered, setAnswered] = useState(false);
 
+    const optionColors = [styles.optionButtonBlue, styles.optionButtonGreen, styles.optionButtonOrange, styles.optionButtonRed];
+
     const startQuiz = category => {
         setQuizCategory(category);
         fetch(`/data/${category}.json`)
@@ -78,15 +80,21 @@ const App = () => {
             ) : (
                 <div>
                     <h3>{quizData[currentQuestion].question}</h3>
-                    {quizData[currentQuestion].options.map(option => (
+                    {quizData[currentQuestion].options.map((option, index) => (
                         <button
                             key={option}
                             onClick={() => handleAnswer(option)}
                             style={{
                                 ...styles.optionButton,
-                                background: selectedAnswer === option ? (option === quizData[currentQuestion].answer ? "green" : "red") : "linear-gradient(to bottom, #4A90E2, #0066cc)",
+                                ...optionColors[index % optionColors.length], // Assigns different colors dynamically
+                                background:
+                                    selectedAnswer === option
+                                        ? option === quizData[currentQuestion].answer
+                                            ? "linear-gradient(to bottom, #4CAF50, #2E7D32)" // Green for correct
+                                            : "linear-gradient(to bottom, #D32F2F, #B71C1C)" // Red for wrong
+                                        : optionColors[index % optionColors.length].background,
                             }}
-                            disabled={answered}
+                            disabled={selectedAnswer !== null} // Prevents multiple clicks
                         >
                             {option}
                         </button>
