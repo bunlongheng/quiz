@@ -47,6 +47,15 @@ const styles = {
         transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
         border: "2px solid white",
     },
+    correctAnswer: {
+        background: "linear-gradient(to bottom, #4CAF50, #2E7D32)", // Green gradient
+        boxShadow: "0px 5px 15px rgba(0, 255, 0, 0.8)",
+    },
+
+    wrongAnswer: {
+        background: "linear-gradient(to bottom, #D32F2F, #B71C1C)", // Red gradient
+        boxShadow: "0px 5px 15px rgba(255, 0, 0, 0.8)",
+    },
 };
 
 export default styles;

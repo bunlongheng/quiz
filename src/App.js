@@ -26,26 +26,31 @@ const App = () => {
     };
 
     const handleAnswer = option => {
-        if (answered) return;
+        if (answered) return; // Prevent multiple clicks
         setAnswered(true);
         setSelectedAnswer(option);
 
-        if (option === quizData[currentQuestion].answer) {
-            setScore(score + 1);
+        const isCorrect = option === quizData[currentQuestion].answer;
+
+        if (isCorrect) {
+            setScore(prev => prev + 1);
+            correctSound.currentTime = 0;
             correctSound.play();
         } else {
+            wrongSound.currentTime = 0;
             wrongSound.play();
         }
 
-        setTimeout(() => {
-            if (currentQuestion + 1 < quizData.length) {
-                setCurrentQuestion(currentQuestion + 1);
+        // ✅ Instantly move to the next question when clicked
+        if (currentQuestion + 1 < quizData.length) {
+            setTimeout(() => {
+                setCurrentQuestion(prev => prev + 1);
                 setSelectedAnswer(null);
                 setAnswered(false);
-            } else {
-                setShowResult(true);
-            }
-        }, 1000);
+            }, 300); // ⬅️ Super short delay for UI transition
+        } else {
+            setShowResult(true);
+        }
     };
 
     if (!quizCategory) {
@@ -82,23 +87,28 @@ const App = () => {
             ) : (
                 <div>
                     <h3>{quizData[currentQuestion].question}</h3>
-                    {quizData[currentQuestion].options.map((option, index) => (
-                        <button
-                            key={option}
-                            onClick={() => handleAnswer(option)}
-                            style={{
-                                ...styles.optionButton,
-                                ...optionColors[index % optionColors.length],
-                                ...(hoveredOption === option ? styles.optionHover : {}),
-                                ...(selectedAnswer ? (option === quizData[currentQuestion].answer ? styles.correctAnswer : option === selectedAnswer ? styles.wrongAnswer : {}) : {}),
-                            }}
-                            onMouseEnter={() => setHoveredOption(option)}
-                            onMouseLeave={() => setHoveredOption(null)}
-                            disabled={selectedAnswer !== null}
-                        >
-                            {option}
-                        </button>
-                    ))}
+                    {quizData[currentQuestion].options.map((option, index) => {
+                        const isCorrect = option === quizData[currentQuestion].answer;
+                        const isSelected = option === selectedAnswer;
+
+                        return (
+                            <button
+                                key={option}
+                                onClick={() => handleAnswer(option)}
+                                style={{
+                                    ...styles.optionButton,
+                                    ...optionColors[index % optionColors.length],
+                                    ...(hoveredOption === option ? styles.optionHover : {}),
+                                    ...(isSelected ? (isCorrect ? styles.correctAnswer : styles.wrongAnswer) : {}),
+                                }}
+                                onMouseEnter={() => setHoveredOption(option)}
+                                onMouseLeave={() => setHoveredOption(null)}
+                                disabled={answered} // ✅ Prevents multiple clicks
+                            >
+                                {option}
+                            </button>
+                        );
+                    })}
                 </div>
             )}
         </div>
