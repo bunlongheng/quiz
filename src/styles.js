@@ -3,17 +3,17 @@ const styles = {
         textAlign: "center",
         padding: "20px",
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #7B1FA2, #4A148C)", // Purple gradient
+        background: "linear-gradient(to bottom, #7B1FA2, #4A148C)",
         color: "white",
     },
     questionCount: {
-        fontSize: "20px",
+        fontSize: "7px",
         fontWeight: "bold",
         background: "black",
         color: "white",
         display: "inline-block",
-        padding: "5px 15px",
-        borderRadius: "20px",
+        padding: "4px 12px",
+        borderRadius: "5px",
     },
     button: {
         display: "block",
@@ -23,18 +23,14 @@ const styles = {
         fontSize: "18px",
         fontWeight: "bold",
         cursor: "pointer",
-        borderRadius: "12px",
+        borderRadius: "5px",
         transition: "all 0.3s ease-in-out",
         border: "none",
-        boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
-        color: "white",
         textTransform: "uppercase",
         position: "relative",
+        color: "white",
         background: "linear-gradient(to bottom, #4A90E2, #0066cc)",
-    },
-    buttonHover: {
-        transform: "scale(1.05)",
-        boxShadow: "0px 7px 20px rgba(255, 255, 255, 0.4)",
+        boxShadow: "inset 0px 2px 8px rgba(255, 255, 255, 0.3), 0px 5px 15px rgba(0, 0, 0, 0.3)",
     },
     optionButton: {
         display: "block",
@@ -44,39 +40,44 @@ const styles = {
         fontSize: "18px",
         fontWeight: "bold",
         cursor: "pointer",
-        borderRadius: "12px",
+        borderRadius: "5px",
         transition: "all 0.3s ease-in-out",
         border: "none",
-        boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.4)",
-        color: "white",
         textTransform: "uppercase",
+        color: "white",
+        boxShadow: "inset 0px 3px 10px rgba(255, 255, 255, 0.5), 0px 5px 15px rgba(0, 0, 0, 0.3)",
+        position: "relative",
     },
     optionButtonBlue: {
-        background: "linear-gradient(to bottom, #3498db, #2980b9)", // Blue gradient
+        background: "linear-gradient(to bottom, #0A61B3, #246A9A)",
     },
     optionButtonGreen: {
-        background: "linear-gradient(to bottom, #2ecc71, #27ae60)", // Green gradient
+        background: "linear-gradient(to bottom, #018B93, #1E8A5B)",
     },
     optionButtonOrange: {
-        background: "linear-gradient(to bottom, #f39c12, #e67e22)", // Orange gradient
+        background: "linear-gradient(to bottom, #E27409, #D98814)",
     },
     optionButtonRed: {
-        background: "linear-gradient(to bottom, #e74c3c, #c0392b)", // Red gradient
+        background: "linear-gradient(to bottom, #E12A67, #B12A3C)",
+    },
+    optionHover: {
+        transform: "scale(1.08)",
+        boxShadow: "0px 7px 20px rgba(255, 255, 255, 0.6)",
     },
     pass: {
         fontSize: "24px",
         fontWeight: "bold",
         padding: "20px",
-        borderRadius: "10px",
-        background: "linear-gradient(to bottom, #4CAF50, #2E7D32)", // Green gradient
+        borderRadius: "5px",
+        background: "linear-gradient(to bottom, #4CAF50, #2E7D32)",
         boxShadow: "0px 5px 20px rgba(0, 255, 0, 0.5)",
     },
     fail: {
         fontSize: "24px",
         fontWeight: "bold",
         padding: "20px",
-        borderRadius: "10px",
-        background: "linear-gradient(to bottom, #D32F2F, #B71C1C)", // Red gradient
+        borderRadius: "5px",
+        background: "linear-gradient(to bottom, #D32F2F, #B71C1C)",
         boxShadow: "0px 5px 20px rgba(255, 0, 0, 0.5)",
     },
 };
