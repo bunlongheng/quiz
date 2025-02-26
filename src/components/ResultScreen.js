@@ -1,30 +1,27 @@
-import React, { useEffect } from "react";
-import styles from "../styles";
+import React from "react";
+import Confetti from "react-confetti";
 
 const ResultScreen = ({ score, totalQuestions }) => {
-    const isPassed = score >= totalQuestions / 2;
-
-    useEffect(() => {
-        const congratsSound = new Audio("/sounds/correct2.mp3");
-        if (isPassed) {
-            congratsSound.play();
-        }
-    }, [isPassed]);
+    const isPass = score / totalQuestions >= 0.5;
+    const percentage = Math.round((score / totalQuestions) * 100);
+    const message = isPass ? "🎉 WELL DONE!" : "❌ TRY AGAIN!";
 
     return (
         <div
             style={{
-                ...styles.container,
-                background: isPassed
-                    ? "linear-gradient(to bottom, #4CAF50, #2E7D32)" // ✅ Green for pass
-                    : "linear-gradient(to bottom, #D32F2F, #B71C1C)", // ❌ Red for fail
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100vh",
+                background: isPass ? "linear-gradient(to bottom, #4CAF50, #2E7D32)" : "linear-gradient(to bottom, #D32F2F, #B71C1C)",
+                color: "white",
+                textAlign: "center",
             }}
         >
-            <div style={isPassed ? styles.pass : styles.fail}>
-                <h2>
-                    Your score: {score} / {totalQuestions}
-                </h2>
-            </div>
+            {isPass && <Confetti />}
+            <h1 style={{ fontSize: "80px", fontWeight: "bold", marginBottom: "20px" }}>{message}</h1>
+            <h2 style={{ fontSize: "50px", fontWeight: "bold" }}>Score: {percentage}%</h2>
         </div>
     );
 };
