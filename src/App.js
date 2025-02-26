@@ -62,15 +62,20 @@ const App = () => {
         return (
             <div style={styles.container}>
                 <h1>Pick a Quiz 🧠</h1>
-                <button onClick={() => startQuiz("dino")} style={styles.button}>
-                    🦖 Dinosaur
-                </button>
-                <button onClick={() => startQuiz("states")} style={styles.button}>
-                    🌎 U.S. States
-                </button>
-                <button onClick={() => startQuiz("birds")} style={styles.button}>
-                    🕊️ Birds
-                </button>
+                <div style={styles.cardContainer}>
+                    <div style={styles.card} onClick={() => startQuiz("dino")}>
+                        <img src="/images/dinos.png" alt="Dinosaur" style={styles.cardImage} />
+                        <h2>🦖 Dinosaur</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("states")}>
+                        <img src="/images/states.png" alt="U.S. States" style={styles.cardImage} />
+                        <h2>🌎 U.S. States</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("birds")}>
+                        <img src="/images/birds.png" alt="Birds" style={styles.cardImage} />
+                        <h2>🕊️ Birds</h2>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -108,7 +113,7 @@ const App = () => {
                                 }}
                                 onMouseEnter={() => setHoveredOption(option)}
                                 onMouseLeave={() => setHoveredOption(null)}
-                                disabled={answered} // ✅ Prevents multiple clicks
+                                disabled={answered}
                             >
                                 {option}
                             </button>

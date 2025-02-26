@@ -17,11 +17,40 @@ const baseButton = {
 
 const styles = {
     container: {
-        textAlign: "center",
-        padding: "20px",
-        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
         background: "linear-gradient(to bottom, #7B1FA2, #4A148C)",
-        color: "white",
+    },
+    cardContainer: {
+        display: "flex",
+        justifyContent: "space-around",
+        width: "80%",
+        marginTop: "20px",
+    },
+    card: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "30%",
+        padding: "20px",
+        backgroundColor: "#fff",
+        borderRadius: "10px",
+        boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
+        cursor: "pointer",
+        transition: "transform 0.2s",
+        ":hover": {
+            transform: "scale(1.05)",
+        },
+    },
+    cardImage: {
+        width: "100%",
+        height: "150px",
+        objectFit: "cover",
+        borderRadius: "10px",
     },
     questionText: {
         marginBottom: "20px", // Add spacing between question and buttons

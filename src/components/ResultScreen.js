@@ -16,7 +16,7 @@ const ResultScreen = ({ score, total }) => {
 
         const timer = setTimeout(() => {
             window.location.reload();
-        }, 9000);
+        }, 15000);
         return () => clearTimeout(timer);
     }, []);
 
