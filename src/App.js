@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from "react";
 
+const correctSound = new Audio("/sounds/correct.mp3");
+const wrongSound = new Audio("/sounds/wrong.mp3");
+
 const App = () => {
     const [quizData, setQuizData] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
+    const [quizCategory, setQuizCategory] = useState(null);
 
-    // Load quiz questions from JSON
-    useEffect(() => {
-        fetch("/data/dino.json")
+    const startQuiz = category => {
+        setQuizCategory(category);
+        fetch(`/data/${category}.json`)
             .then(response => response.json())
             .then(data => setQuizData(data))
             .catch(error => console.error("Error loading JSON:", error));
-    }, []);
-
-    // Function to play sounds
-    const playSound = type => {
-        const audio = new Audio(type === "correct" ? "/sounds/correct.mp3" : "/sounds/wrong.mp3");
-        audio.play();
     };
 
     const handleAnswer = option => {
         setSelectedAnswer(option);
-
         if (option === quizData[currentQuestion].answer) {
             setScore(score + 1);
-            playSound("correct"); // Play correct sound
+            correctSound.play(); // Play success sound
         } else {
-            playSound("wrong"); // Play wrong sound
+            wrongSound.play(); // Play failure sound
         }
 
         setTimeout(() => {
@@ -41,11 +38,25 @@ const App = () => {
         }, 1000);
     };
 
+    if (!quizCategory) {
+        return (
+            <div style={{ textAlign: "center", padding: "20px" }}>
+                <h1>Pick a Quiz 🧠</h1>
+                <button onClick={() => startQuiz("dino")} style={styles.button} onMouseEnter={e => (e.target.style.border = "2px solid black")} onMouseLeave={e => (e.target.style.border = "2px solid transparent")}>
+                    🦖 Dinosaur Quiz
+                </button>
+                <button onClick={() => startQuiz("states")} style={styles.button} onMouseEnter={e => (e.target.style.border = "2px solid black")} onMouseLeave={e => (e.target.style.border = "2px solid transparent")}>
+                    🌎 U.S. States Quiz
+                </button>
+            </div>
+        );
+    }
+
     if (quizData.length === 0) return <h1>Loading...</h1>;
 
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
-            <h1>Dinosaur Quiz 🦖</h1>
+            <h1>{quizCategory === "dino" ? "Dinosaur Quiz 🦖" : "U.S. States Quiz 🌎"}</h1>
             {showResult ? (
                 <h2>
                     Your score: {score} / {quizData.length}
@@ -58,21 +69,11 @@ const App = () => {
                             key={option}
                             onClick={() => handleAnswer(option)}
                             style={{
-                                display: "block",
-                                margin: "10px auto",
-                                padding: "12px",
-                                width: "220px",
-                                fontSize: "16px",
-                                fontWeight: "bold",
-                                cursor: "pointer",
-                                borderRadius: "8px",
-                                transition: "all 0.2s ease-in-out",
+                                ...styles.button,
                                 background: selectedAnswer === option ? (option === quizData[currentQuestion].answer ? "green" : "red") : "lightgray",
-                                color: "white",
-                                border: "2px solid transparent",
                             }}
-                            onMouseEnter={e => (e.target.style.border = "2px solid black")} // Hover effect
-                            onMouseLeave={e => (e.target.style.border = "2px solid transparent")} // Reset hover
+                            onMouseEnter={e => (e.target.style.border = "2px solid black")}
+                            onMouseLeave={e => (e.target.style.border = "2px solid transparent")}
                         >
                             {option}
                         </button>
@@ -81,6 +82,23 @@ const App = () => {
             )}
         </div>
     );
+};
+
+const styles = {
+    button: {
+        display: "block",
+        margin: "10px auto",
+        padding: "12px",
+        width: "220px",
+        fontSize: "16px",
+        fontWeight: "bold",
+        cursor: "pointer",
+        borderRadius: "8px",
+        transition: "all 0.2s ease-in-out",
+        background: "lightgray",
+        color: "white",
+        border: "2px solid transparent",
+    },
 };
 
 export default App;
