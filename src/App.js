@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles"; // Import styles
+import styles from "./styles";
 
 const correctSound = new Audio("/sounds/correct.mp3");
 const wrongSound = new Audio("/sounds/wrong.mp3");
@@ -12,6 +12,8 @@ const App = () => {
     const [showResult, setShowResult] = useState(false);
     const [quizCategory, setQuizCategory] = useState(null);
     const [answered, setAnswered] = useState(false);
+
+    const [hoveredOption, setHoveredOption] = useState(null);
 
     const optionColors = [styles.optionButtonBlue, styles.optionButtonGreen, styles.optionButtonOrange, styles.optionButtonRed];
 
@@ -86,15 +88,13 @@ const App = () => {
                             onClick={() => handleAnswer(option)}
                             style={{
                                 ...styles.optionButton,
-                                ...optionColors[index % optionColors.length], // Assigns different colors dynamically
-                                background:
-                                    selectedAnswer === option
-                                        ? option === quizData[currentQuestion].answer
-                                            ? "linear-gradient(to bottom, #4CAF50, #2E7D32)" // Green for correct
-                                            : "linear-gradient(to bottom, #D32F2F, #B71C1C)" // Red for wrong
-                                        : optionColors[index % optionColors.length].background,
+                                ...optionColors[index % optionColors.length],
+                                ...(hoveredOption === option ? styles.optionHover : {}),
+                                ...(selectedAnswer ? (option === quizData[currentQuestion].answer ? styles.correctAnswer : option === selectedAnswer ? styles.wrongAnswer : {}) : {}),
                             }}
-                            disabled={selectedAnswer !== null} // Prevents multiple clicks
+                            onMouseEnter={() => setHoveredOption(option)}
+                            onMouseLeave={() => setHoveredOption(null)}
+                            disabled={selectedAnswer !== null}
                         >
                             {option}
                         </button>
