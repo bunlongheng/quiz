@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles";
+import ResultScreen from "./components/ResultScreen";
 
 const correctSound = new Audio("/sounds/correct.mp3");
 const wrongSound = new Audio("/sounds/wrong.mp3");
@@ -16,6 +17,10 @@ const App = () => {
     const [hoveredOption, setHoveredOption] = useState(null);
 
     const optionColors = [styles.optionButtonBlue, styles.optionButtonGreen, styles.optionButtonOrange, styles.optionButtonRed];
+
+    if (showResult) {
+        return <ResultScreen score={score} totalQuestions={quizData.length} />;
+    }
 
     const startQuiz = category => {
         setQuizCategory(category);
