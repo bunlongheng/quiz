@@ -1,12 +1,12 @@
 const baseButton = {
-    display: "block", // Ensure buttons appear on separate lines
+    display: "block",
     margin: "10px auto",
-    padding: "15px",
+    padding: "20px",
     width: "300px",
-    fontSize: "18px",
+    fontSize: "20px",
     fontWeight: "bold",
     cursor: "pointer",
-    borderRadius: "5px",
+    borderRadius: "10px",
     transition: "all 0.3s ease-in-out",
     border: "none",
     textTransform: "uppercase",
@@ -27,15 +27,15 @@ const styles = {
     },
     cardContainer: {
         display: "flex",
-        flexWrap: "wrap", // Allow cards to wrap into multiple rows
-        justifyContent: "center", // Center cards horizontally
-        gap: "20px", // Space between cards
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "20px",
         width: "100%",
         maxWidth: "1200px",
         marginTop: "20px",
     },
     card: {
-        flex: "1 1 calc(25% - 40px)", // 4 cards per row with spacing
+        flex: "1 1 calc(25% - 40px)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -50,7 +50,7 @@ const styles = {
             transform: "scale(1.05)",
             boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
         },
-        maxWidth: "250px", // Limit card width for better alignment
+        maxWidth: "250px",
     },
     cardImage: {
         width: "100%",
@@ -59,11 +59,15 @@ const styles = {
         borderRadius: "10px",
     },
     questionText: {
-        marginBottom: "20px", // Add spacing between question and buttons
+        marginBottom: "20px",
+        fontSize: "24px",
+        fontWeight: "bold",
+        textAlign: "center",
+        color: "#fff",
     },
     optionContainer: {
         display: "flex",
-        flexDirection: "column", // Ensure buttons stack vertically
+        flexDirection: "column",
         alignItems: "center",
     },
     button: {
@@ -83,12 +87,31 @@ const styles = {
         border: "2px solid white",
     },
     correctAnswer: {
-        background: "linear-gradient(to bottom, #4CAF50, #2E7D32)", // Green gradient
+        background: "linear-gradient(to bottom, #4CAF50, #2E7D32)",
         boxShadow: "0px 5px 15px rgba(0, 255, 0, 0.8)",
     },
     wrongAnswer: {
-        background: "linear-gradient(to bottom, #D32F2F, #B71C1C)", // Red gradient
+        background: "linear-gradient(to bottom, #D32F2F, #B71C1C)",
         boxShadow: "0px 5px 15px rgba(255, 0, 0, 0.8)",
+    },
+    questionCount: {
+        fontSize: "20px",
+        fontWeight: "bold",
+        color: "#fff",
+        marginBottom: "20px",
+    },
+    quizTitle: {
+        fontSize: "50px",
+        fontWeight: "bold",
+        color: "#fff",
+        marginBottom: "20px",
+    },
+    quizImage: {
+        width: "200px",
+        height: "150px",
+        objectFit: "cover",
+        borderRadius: "10px",
+        marginBottom: "20px",
     },
 };
 
