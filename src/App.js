@@ -20,6 +20,8 @@ const App = () => {
     };
 
     const handleAnswer = option => {
+        if (selectedAnswer) return; // Prevent clicking multiple times
+
         setSelectedAnswer(option);
         if (option === quizData[currentQuestion].answer) {
             setScore(score + 1);
