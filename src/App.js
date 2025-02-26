@@ -63,17 +63,37 @@ const App = () => {
             <div style={styles.container}>
                 <h1>Pick a Quiz 🧠</h1>
                 <div style={styles.cardContainer}>
-                    <div style={styles.card} onClick={() => startQuiz("dino")}>
-                        <img src="/images/dinos.png" alt="Dinosaur" style={styles.cardImage} />
-                        <h2>🦖 Dinosaur</h2>
-                    </div>
-                    <div style={styles.card} onClick={() => startQuiz("states")}>
-                        <img src="/images/states.png" alt="U.S. States" style={styles.cardImage} />
-                        <h2>🌎 U.S. States</h2>
+                    <div style={styles.card} onClick={() => startQuiz("aircraft")}>
+                        <img src="/images/aircrafts.png" alt="Aircraft" style={styles.cardImage} />
+                        <h2>✈️ Aircraft</h2>
                     </div>
                     <div style={styles.card} onClick={() => startQuiz("birds")}>
                         <img src="/images/birds.png" alt="Birds" style={styles.cardImage} />
                         <h2>🕊️ Birds</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("construction-vehicles")}>
+                        <img src="/images/construction-vehicles.png" alt="Construction Vehicles" style={styles.cardImage} />
+                        <h2>🚜 Construction Vehicles</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("dino")}>
+                        <img src="/images/dinos.png" alt="Dinosaurs" style={styles.cardImage} />
+                        <h2>🦖 Dinosaurs</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("fruits")}>
+                        <img src="/images/fruits.png" alt="Fruits" style={styles.cardImage} />
+                        <h2>🍎 Fruits</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("insects")}>
+                        <img src="/images/insects.png" alt="Insects" style={styles.cardImage} />
+                        <h2>🐞 Insects</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("reptiles")}>
+                        <img src="/images/reptiles.png" alt="Reptiles" style={styles.cardImage} />
+                        <h2>🐍 Reptiles</h2>
+                    </div>
+                    <div style={styles.card} onClick={() => startQuiz("states")}>
+                        <img src="/images/states.png" alt="U.S. States" style={styles.cardImage} />
+                        <h2>🌎 U.S. States</h2>
                     </div>
                 </div>
             </div>

@@ -21,30 +21,36 @@ const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        minHeight: "100vh",
         background: "linear-gradient(to bottom, #7B1FA2, #4A148C)",
+        padding: "20px",
     },
     cardContainer: {
         display: "flex",
-        justifyContent: "space-around",
-        width: "80%",
+        flexWrap: "wrap", // Allow cards to wrap into multiple rows
+        justifyContent: "center", // Center cards horizontally
+        gap: "20px", // Space between cards
+        width: "100%",
+        maxWidth: "1200px",
         marginTop: "20px",
     },
     card: {
+        flex: "1 1 calc(25% - 40px)", // 4 cards per row with spacing
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: "30%",
         padding: "20px",
         backgroundColor: "#fff",
         borderRadius: "10px",
         boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
         cursor: "pointer",
-        transition: "transform 0.2s",
+        transition: "transform 0.2s, box-shadow 0.2s",
         ":hover": {
             transform: "scale(1.05)",
+            boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
         },
+        maxWidth: "250px", // Limit card width for better alignment
     },
     cardImage: {
         width: "100%",
@@ -80,7 +86,6 @@ const styles = {
         background: "linear-gradient(to bottom, #4CAF50, #2E7D32)", // Green gradient
         boxShadow: "0px 5px 15px rgba(0, 255, 0, 0.8)",
     },
-
     wrongAnswer: {
         background: "linear-gradient(to bottom, #D32F2F, #B71C1C)", // Red gradient
         boxShadow: "0px 5px 15px rgba(255, 0, 0, 0.8)",
