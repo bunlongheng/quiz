@@ -42,9 +42,9 @@ const styles = {
     optionButtonOrange: { background: "linear-gradient(to bottom, #E27409, #E2740970)" },
     optionButtonRed: { background: "linear-gradient(to bottom, #E12A67, #E12A6770)" },
     optionHover: {
-        transform: "scale(1.08)",
+        transform: "scale(1.04)",
         boxShadow: "0px 0px 100px rgba(255, 255, 255, 0.8)",
-        transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+        transition: "transform 2s ease-in-out, box-shadow 2s ease-in-out",
         border: "2px solid white",
     },
     correctAnswer: {

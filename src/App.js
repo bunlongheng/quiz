@@ -19,7 +19,7 @@ const App = () => {
     const optionColors = [styles.optionButtonBlue, styles.optionButtonGreen, styles.optionButtonOrange, styles.optionButtonRed];
 
     if (showResult) {
-        return <ResultScreen score={score} totalQuestions={quizData.length} />;
+        return <ResultScreen score={score} total={quizData?.length || 0} onRestart={() => window.location.reload()} />;
     }
 
     const startQuiz = category => {

@@ -4,7 +4,8 @@ import Confetti from "react-confetti";
 
 const ResultScreen = ({ score, total }) => {
     const navigate = useNavigate();
-    const percentage = ((score / total) * 100).toFixed(0);
+    const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+
     const isPass = score >= total / 2;
 
     useEffect(() => {
